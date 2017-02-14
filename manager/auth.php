@@ -3,12 +3,9 @@
   require_once 'php-jwt/src/ExpiredException.php';
   require_once 'php-jwt/src/SignatureInvalidException.php';
   require_once 'php-jwt/src/JWT.php';
+  include 'config.php'
 
   use \Firebase\JWT\JWT;
-
-  // Get your service account's email address and private key from the JSON key file
-  $service_account_email = "service_account_email";
-  $private_key = "private_key";
 
   // Check if the user is logged in
   $uid = $_SERVER['REMOTE_USER'];
