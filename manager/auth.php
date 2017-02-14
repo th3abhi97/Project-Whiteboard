@@ -3,7 +3,7 @@
   require_once 'php-jwt/src/ExpiredException.php';
   require_once 'php-jwt/src/SignatureInvalidException.php';
   require_once 'php-jwt/src/JWT.php';
-  include 'config.php'
+  include 'config.php';
 
   use \Firebase\JWT\JWT;
 
