@@ -1,0 +1,16 @@
+
+# BEGIN WordPress
+<IfModule mod_rewrite.c>
+RewriteEngine On
+RewriteBase /manager/
+RewriteRule ^index\.php$ - [L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /manager/index.php [L]
+</IfModule>
+
+# END WordPress
+# BEGIN Shibboleth
+AuthType UWNetID 
+Require valid-user
+# END Shibboleth
