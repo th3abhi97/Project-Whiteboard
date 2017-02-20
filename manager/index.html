@@ -3,6 +3,10 @@
         <title>
             Firebase at it's test!
         </title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.red-indigo.min.css" />
+        <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+        <link rel="stylesheet" href="style.css" />
         <script src="https://www.gstatic.com/firebasejs/3.6.7/firebase.js"></script>
         <script>
             // Initialize Firebase
@@ -18,8 +22,87 @@
         <script src="main.js"></script>
     </head>
     <body>
-        <h3 id="head">Some Heading</h3>
-        <div id="data"></div>
+        <div class="mdl-layout mdl-js-layout">
+            <header class="mdl-layout__header">
+                <div class="mdl-layout-icon"></div>
+                <div class="mdl-layout__header-row">
+                    <span class="mdl-layout__title">Project Whiteboard</span>
+                    <div class="mdl-layout-spacer"></div>
+                    <nav class="mdl-navigation">
+                        <a class="mdl-navigation__link" id="my-events">My Events</a>
+                        <a class="mdl-navigation__link" id="all-events">All Events</a>
+                    </nav>
+                </div>
+            </header>
+            <div id="main-content" class="main-content">
+                <div id="loading-modal" class="mdl-spinner mdl-js-spinner is-active loading-modal"></div>
+                <div class="demo-card-wide mdl-card mdl-shadow--2dp main-content-card">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Welcome</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Mauris sagittis pellentesque lacus eleifend lacinia...
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            Get Started
+                        </a>
+                    </div>
+                    <div class="mdl-card__menu">
+                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                            <i class="material-icons">share</i>
+                        </button>
+                    </div>
+                </div>
+                <div class="demo-card-wide mdl-card mdl-shadow--2dp main-content-card">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Welcome</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Mauris sagittis pellentesque lacus eleifend lacinia...
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            Get Started
+                        </a>
+                    </div>
+                    <div class="mdl-card__menu">
+                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                            <i class="material-icons">share</i>
+                        </button>
+                    </div>
+                </div>
+                <div class="demo-card-wide mdl-card mdl-shadow--2dp main-content-card">
+                    <div class="mdl-card__title">
+                        <h2 class="mdl-card__title-text">Welcome</h2>
+                    </div>
+                    <div class="mdl-card__supporting-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Mauris sagittis pellentesque lacus eleifend lacinia...
+                    </div>
+                    <div class="mdl-card__actions mdl-card--border">
+                        <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                            Get Started
+                        </a>
+                    </div>
+                    <div class="mdl-card__menu">
+                        <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                            <i class="material-icons">share</i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="add-my-event" id="add-my-event">
+                <button class="mdl-button mdl-js-button mdl-button--fab mdl-js-ripple-effect mdl-button--colored">
+                    <i class="material-icons">add</i>
+                </button>
+            </div>
+        </div>
+        <!--<h3 id="head">Some Heading</h3>
+        <div id="data"></div>-->
+
     </body>
     <script src="main.js"></script>
 </html>
