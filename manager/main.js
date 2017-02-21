@@ -65,7 +65,7 @@ function failureAuth(error) {
 }
 
 // Populate event data in correct id's
-function populateEventData(events) {
+function populateEventData(events, source=null) {
     // Makes sure user_details are set or assume auth failed
     if (user_details == null) return;
     // Pre-compile the template
@@ -103,14 +103,16 @@ function getData(node, callback) {
 
 // Fetch the source html to be used with Handlebars
 function fetchSource(url) {
+    var rawSource = "";
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onload = function() {
-        if (xmlHttp.status == 200) {
-            return xmlHttp.response;
+        if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+            rawSource = xmlHttp.response;
         }
     }
-    xmlHttp.open("GET", url, true);
-    xmlHttp.send(null);
+    xmlHttp.open("GET", url, false);
+    xmlHttp.send();
+    return rawSource;
 }
 
 // saves the user details as a global variable
