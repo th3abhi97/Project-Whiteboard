@@ -1,28 +1,42 @@
 "use strict";
 
-// perform all necessary steps here
+// Globally accessible variables
+var my_events_button = document.getElementById("my-events-button");
+var all_events_button = document.getElementById("all-events-button");
+var my_events = document.getElementById("my-events");
+var all_events = document.getElementById("all-events");
+var user_details = null;
+
+// Perform all initial steps here
 window.onload = function() {
-    var my_events = document.getElementById("my-events");
-    var all_events = document.getElementById("all-events");
-    /*my_events.onclick = function() {
-        console.log(this);
-        var loading_modal = document.getElementById("loading-modal");
-        loading_modal.classList.remove("is-active");
-    };*/
+    all_events_button.onclick = function() {
+        hide(my_events);
+        show(all_events);
+    }
+    my_events_button.onclick = function() {
+        hide(all_events);
+        show(my_events);
+    }
+
+    authenticate();
+    // Do some shenanigns
+    getData("events/", populateEventData);
 }
 
-// authenticate the user
+// Authenticate the user
 function authenticate() {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onload = function() {
         if (xmlHttp.status == 200) {
             var token = xmlHttp.responseText;
-            // Authenticate
-            firebase.auth().signInWithCustomToken(token).catch(function(error) {
-                // Handle Errors here.
-                var errorCode = error.code;
-                var errorMessage = error.message;
-                console.log(errorCode +  " : " + errorMessage);
+            hide(document.getElementById("loading-modal"));
+            firebase.auth().signInWithCustomToken(token)
+            .then(function(success){
+                console.log(success);
+                getData("/users/" + success.uid, setUserDetails);
+            }, function(error) {
+                console.log(error);
+                failureAuth(error);
             });
         }
     }
@@ -31,7 +45,85 @@ function authenticate() {
     xmlHttp.send(null);
 }
 
-// Get data and populate the window
-function getData() {
+// Events to occur if auth fails.
+function failureAuth(error) {
+    var auth_error = document.getElementById("auth-error");
 
+    // handle dom with error message
+    auth_error.append(document.createTextNode(error.code));
+    var p = document.createElement("p");
+    p.append(document.createTextNode(error.message));
+    auth_error.append(p);
+
+    hide(my_events);
+    hide(all_events);
+    show(auth_error);
+}
+
+// Populate event data in correct id's
+function populateEventData(events) {
+    // Makes sure user_details are set or assume auth failed
+    if (user_details == null) return;
+    // Pre-compile the template
+    var source = getSource("templates/event-card-template.html");
+    var template = Handlebars.compile(source);
+    // Empty out the inner html
+    my_events.html("");
+    all_events.html("");
+    for (curEvent in events) {
+        // Construct the card data
+        var card = {
+            title: curEvent.name,
+            description: curEvent.description
+        };
+        // Check if we need to push the card on my-events
+        if (curEvent.group_name === user_details.group_name) {
+            createCard(card, template, my_events);
+        }
+        createCard(card, template, all_events);
+    }
+}
+
+// Create an event data card
+function createCard(card, template, binder) {
+    binder.append(template(card));
+}
+
+// Get data from firebase database
+function getData(node, callback) {
+    var data = firebase.database().ref(node);
+    data.on("value", function(snap){
+        callback(snap.val());
+    });
+}
+
+// Fetch the source html to be used with Handlebars
+function fetchSource(url) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onload = function() {
+        if (xmlHttp.status == 200) {
+            return xmlHttp.response;
+        }
+    }
+    xmlHttp.open("GET", url, true);
+    xmlHttp.send(null);
+}
+
+// saves the user details as a global variable
+function setUserDetails(data) {
+    var uid = firebase.auth().currentUser.uid;
+    user_details = {
+        uid: uid,
+        group_name: data.group_name
+    };
+}
+
+// Hide the given element
+function hide(element) {
+    element.classList.add("hidden");
+}
+
+// Unhide/show the given element
+function show(element) {
+    element.classList.remove("hidden");
 }
