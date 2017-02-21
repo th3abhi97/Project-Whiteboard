@@ -69,7 +69,7 @@ function populateEventData(events) {
     // Makes sure user_details are set or assume auth failed
     if (user_details == null) return;
     // Pre-compile the template
-    var source = getSource("templates/event-card-template.html");
+    var source = fetchSource("templates/event-card-template.html");
     var template = Handlebars.compile(source);
     // Empty out the inner html
     my_events.html("");
