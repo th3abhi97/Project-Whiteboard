@@ -74,7 +74,7 @@ function populateEventData(events, source=null) {
     // Empty out the inner html
     my_events.innerHTML = "";
     all_events.innerHTML = "";
-    for (curEvent in events) {
+    events.forEach(function(curEvent) {
         // Construct the card data
         var card = {
             title: curEvent.name,
@@ -85,7 +85,7 @@ function populateEventData(events, source=null) {
             createCard(card, template, my_events);
         }
         createCard(card, template, all_events);
-    }
+    });
 }
 
 // Create an event data card
