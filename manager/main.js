@@ -3,6 +3,7 @@
 // Globally accessible variables
 var my_events_button = document.getElementById("my-events-button");
 var all_events_button = document.getElementById("all-events-button");
+var add_my_event = document.getElementById("add-my-event");
 var my_events = document.getElementById("my-events");
 var all_events = document.getElementById("all-events");
 var user_details = null;
@@ -11,11 +12,13 @@ var user_details = null;
 window.onload = function() {
     all_events_button.onclick = function() {
         hide(my_events);
+        hide(add_my_event);
         show(all_events);
     }
     my_events_button.onclick = function() {
         hide(all_events);
         show(my_events);
+        show(add_my_event);
     }
     authenticate();
 }
@@ -61,6 +64,7 @@ function failureAuth(error) {
 
     hide(my_events);
     hide(all_events);
+    hide(add_my_event);
     show(auth_error);
 }
 
