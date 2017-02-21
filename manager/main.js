@@ -65,7 +65,7 @@ function failureAuth(error) {
 }
 
 // Populate event data in correct id's
-function populateEventData(events, source=null) {
+function populateEventData(events) {
     // Makes sure user_details are set or assume auth failed
     if (user_details == null) return;
     // Pre-compile the template
@@ -74,18 +74,18 @@ function populateEventData(events, source=null) {
     // Empty out the inner html
     my_events.innerHTML = "";
     all_events.innerHTML = "";
-    events.forEach(function(curEvent) {
+    for (var curEvent in events){
         // Construct the card data
         var card = {
-            title: curEvent.name,
-            description: curEvent.description
+            title: events[curEvent].name,
+            description: events[curEvent].description
         };
         // Check if we need to push the card on my-events
-        if (curEvent.group_name === user_details.group_name) {
+        if (events[curEvent].group_name === user_details.group_name) {
             createCard(card, template, my_events);
         }
         createCard(card, template, all_events);
-    });
+    }
 }
 
 // Create an event data card
