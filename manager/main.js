@@ -90,9 +90,7 @@ function populateEventData(events) {
 
 // Create an event data card
 function createCard(card, template, binder) {
-    var parser = new DOMParser();
-    var html = parser.parseFromString(template(card), "text/xml");
-    binder.append(html.firstChild);
+    binder.innerHTML = binder.innerHTML + template(card);
 }
 
 // Get data from firebase database
