@@ -112,7 +112,7 @@ function fetchSource(url) {
     }
     xmlHttp.open("GET", url, false);
     xmlHttp.send();
-    return rawSource;
+    return $.parseHTML(rawSource);
 }
 
 // saves the user details as a global variable
