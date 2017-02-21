@@ -72,8 +72,8 @@ function populateEventData(events, source=null) {
     var source = fetchSource("templates/event-card-template.html");
     var template = Handlebars.compile(source);
     // Empty out the inner html
-    my_events.html("");
-    all_events.html("");
+    my_events.innerHTML = "";
+    all_events.innerHTML = "";
     for (curEvent in events) {
         // Construct the card data
         var card = {
