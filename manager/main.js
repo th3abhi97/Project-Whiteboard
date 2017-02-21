@@ -90,7 +90,9 @@ function populateEventData(events) {
 
 // Create an event data card
 function createCard(card, template, binder) {
-    binder.append(template(card));
+    var parser = new DOMParser();
+    var html = parser.parseFromString(template(card), "text/xml");
+    binder.append(html.firstChild);
 }
 
 // Get data from firebase database
@@ -112,7 +114,7 @@ function fetchSource(url) {
     }
     xmlHttp.open("GET", url, false);
     xmlHttp.send();
-    return $.parseHTML(rawSource);
+    return rawSource;
 }
 
 // saves the user details as a global variable
