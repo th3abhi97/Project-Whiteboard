@@ -17,10 +17,7 @@ window.onload = function() {
         hide(all_events);
         show(my_events);
     }
-
     authenticate();
-    // Do some shenanigns
-    getData("events/", populateEventData);
 }
 
 // Authenticate the user
@@ -34,6 +31,7 @@ function authenticate() {
             .then(function(success){
                 console.log(success);
                 getData("/users/" + success.uid, setUserDetails);
+                successAuth();
             }, function(error) {
                 console.log(error);
                 failureAuth(error);
@@ -43,6 +41,12 @@ function authenticate() {
     // False for synchronous request
     xmlHttp.open("GET", "auth.php", false);
     xmlHttp.send(null);
+}
+
+// Events to occur if auth succeeds
+function successAuth() {
+    // Do some shenanigns
+    getData("events/", populateEventData);
 }
 
 // Events to occur if auth fails.
